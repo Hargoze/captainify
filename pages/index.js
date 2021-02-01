@@ -1,5 +1,6 @@
 import { DarkModeSwitch } from '../components/DarkModeSwitch'
 import { Container } from '../components/Container'
+import { SongBox} from "../components/SongBox"
 import { getAllSongsForHome } from '../lib/api'
 import { Flex, Text, useColorModeValue} from '@chakra-ui/react'
 
@@ -8,7 +9,7 @@ export default function Index({songs}) {
   return (
     <Container>
       <DarkModeSwitch />
-      <Text>lol</Text>
+      <SongBox songs={songs}/>
     </Container>
   )
 }
