@@ -1,6 +1,6 @@
 import { DarkModeSwitch } from '../components/DarkModeSwitch'
 import { Container } from '../components/Container'
-import { getAllSongsForHome } from '@/lib/api'
+import { getAllSongsForHome } from '../lib/api'
 import { Flex, Text, useColorModeValue} from '@chakra-ui/react'
 
 export default function Index({songs}) {
