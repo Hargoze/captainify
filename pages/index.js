@@ -1,11 +1,9 @@
 import { DarkModeSwitch } from '../components/DarkModeSwitch'
 import { Container } from '../components/Container'
 import { SongBox} from "../components/SongBox"
-import { getAllSongsForHome } from '../lib/api'
-import { Flex, Text, useColorModeValue} from '@chakra-ui/react'
+import { getAllSongsForHome, getAllSongsId, getAllPostsWithSlug } from '../lib/api'
 
 export default function Index({songs}) {
-  console.log(songs)
   return (
     <Container>
       <DarkModeSwitch />
@@ -16,6 +14,9 @@ export default function Index({songs}) {
 
 export async function getStaticProps() {
   const songs = (await getAllSongsForHome())
+  const songsID = (await getAllSongsId())
+
+  console.log(songsID)
   return {
     props: { songs },
   }
