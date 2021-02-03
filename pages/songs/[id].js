@@ -1,18 +1,26 @@
 import { Container } from '../../components/Container'
-import { Text} from '@chakra-ui/react'
+import { Box, Stack, Flex, AspectRatio} from '@chakra-ui/react'
 import { getAllSongsId, getSongById } from '../../lib/api'
+import React from "react"
 
 export default function Songs({song}) {
+    console.log(song)
     return (
-        <Container>
-            <Text>songs</Text>
-        </Container>
+        <Stack>
+            <AspectRatio maxW="560px" ratio={1}>
+                <iframe
+                    title={song.title}
+                    src={song.link}
+                    allowFullScreen
+                />
+            </AspectRatio>
+        </Stack>
     )
 }
 
 export async function getStaticProps({ params}) {
-    const song = await getSongById(params.id)
-
+    const data = await getSongById(params.id)
+    const song = data.songs[0]
     return {
         props: { song },
     }
