@@ -1,4 +1,5 @@
-import { DarkModeSwitch } from '../components/DarkModeSwitch'
+//import { DarkModeSwitch } from '../components/DarkModeSwitch'
+import { Header } from '../components/Header'
 import { Container } from '../components/Container'
 import { SongBox} from "../components/SongBox"
 import { getAllSongsForHome, getAllSongsId, getAllPostsWithSlug } from '../lib/api'
@@ -6,7 +7,7 @@ import { getAllSongsForHome, getAllSongsId, getAllPostsWithSlug } from '../lib/a
 export default function Index({songs}) {
   return (
     <Container>
-      <DarkModeSwitch />
+      <Header />
       <SongBox songs={songs}/>
     </Container>
   )
