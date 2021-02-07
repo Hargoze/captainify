@@ -1,24 +1,20 @@
 import ReactAudioPlayer from 'react-audio-player'
-import { Box, Stack, Flex, AspectRatio, Text} from '@chakra-ui/react'
+import { Box, Stack, Flex, AspectRatio, Text, Image, Button, Checkbox} from '@chakra-ui/react'
 import { getAllSongsId, getSongById } from '../../lib/api'
-import React from "react"
+import { Header } from '../../components/Header'
+import { Container } from '../../components/Container'
+import React, { useEffect, useState } from 'react';
 
 export default function Songs({song}) {
-    console.log(song)
     return (
-        <Stack>
-            <AspectRatio maxW="560px" ratio={1}>
-                <iframe
-                    title={song.title}
-                    src={song.link}
-                    allowFullScreen
-                />
-            </AspectRatio>
+        <Container>
+            <Header />
+            <Image src={`${song.thumbnail.url.startsWith('/') ? process.env.NEXT_PUBLIC_STRAPI_API_URL : ''}${song.thumbnail.url}`}/>
             <ReactAudioPlayer
                 src={`${song.file.url.startsWith('/') ? process.env.NEXT_PUBLIC_STRAPI_API_URL : ''}${song.file.url}`}
                 controls
             />
-        </Stack>
+        </Container>
     )
 }
 

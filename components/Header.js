@@ -2,14 +2,14 @@ import { Flex, useColorModeValue, IconButton, Link} from '@chakra-ui/react'
 import { DarkModeSwitch } from './DarkModeSwitch'
 import { GiPirateFlag } from "react-icons/gi";
 export const Header = () => {
-  const color = useColorModeValue("white", "gray.500")
+  const color = useColorModeValue("gray.500", "gray.800")
 
   return (
     <Flex
       direction="row"
       alignItems="center"
       justifyContent="space-between"
-      bg="gray.500"
+      bg={color}
       h="24"
       w="100%"
       px="8"
