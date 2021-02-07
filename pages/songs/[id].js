@@ -1,5 +1,5 @@
-import { Container } from '../../components/Container'
-import { Box, Stack, Flex, AspectRatio} from '@chakra-ui/react'
+import ReactAudioPlayer from 'react-audio-player'
+import { Box, Stack, Flex, AspectRatio, Text} from '@chakra-ui/react'
 import { getAllSongsId, getSongById } from '../../lib/api'
 import React from "react"
 
@@ -14,6 +14,10 @@ export default function Songs({song}) {
                     allowFullScreen
                 />
             </AspectRatio>
+            <ReactAudioPlayer
+                src={`${song.file.url.startsWith('/') ? process.env.NEXT_PUBLIC_STRAPI_API_URL : ''}${song.file.url}`}
+                controls
+            />
         </Stack>
     )
 }

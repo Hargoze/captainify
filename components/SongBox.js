@@ -9,7 +9,7 @@ export const SongBox = ({songs}) => {
     return (
       <Stack my="24" bg={bg} width="80%" color={textColor}>
         {songs.map((current, i) => (
-          <Link _hover={{textDecoration:"none"}} key={i} >
+          <Link _hover={{textDecoration:"none"}} key={i} href={`/songs/${current.id}`}>
             <Flex height="180px" shadow="0 7px 29px -12px rgba(0,0,0,34)" bg={bg}
             _hover={{textDecoration:"none", transform: "scale(1.02)"}}>
                 <Thumbnail url={current.thumbnail.url}/>
