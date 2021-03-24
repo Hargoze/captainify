@@ -15,9 +15,7 @@ export default function Index({songs}) {
 
 export async function getStaticProps() {
   const songs = (await getAllSongsForHome())
-  const songsID = (await getAllSongsId())
 
-  console.log(songsID)
   return {
     props: { songs },
   }
