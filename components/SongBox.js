@@ -10,11 +10,11 @@ export const SongBox = ({songs}) => {
       <Stack my="24" width={{base:"80%", lg:"40%"}} color={textColor}>
         {songs.map((current, i) => (
           <Link _hover={{textDecoration:"none"}} key={i} href={`/songs/${current.id}`} my="4">
-            <Flex height="180px" shadow="0 7px 29px -12px rgba(0,0,0,34)" bg={bg}
+            <Flex direction={{base: "column", lg:"row"}} shadow="0 7px 29px -12px rgba(0,0,0,34)" bg={bg}
             _hover={{textDecoration:"none", transform: "scale(1.02)"}}>
                 <Thumbnail url={current.thumbnail.url} borderRadius="full"/>
-                <Stack w="100%" alignItems="start" px="6" justify="space-around">
-                   <Text fontSize="24px" >{current.title}</Text>
+                <Stack w="100%" alignItems="start" px="6" justify="space-around" py={{base:"6",lg:"0"}}>
+                   <Text fontSize="24px" textOverflow="ellipsis" noOfLines={{base:1, lg:2}}>{current.title}</Text>
                    <Flex justify="center" align="center">
                      <Avatar url={current.author.picture.url}/>
                      <Text fontSize="18px" pl="4">{current.author.name}</Text>
