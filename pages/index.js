@@ -1,22 +1,38 @@
-//import { DarkModeSwitch } from '../components/DarkModeSwitch'
 import { Header } from '../components/Header'
 import { Container } from '../components/Container'
 import { SongBox} from "../components/SongBox"
-import { getAllSongsForHome, getAllSongsId, getAllPostsWithSlug } from '../lib/api'
+import { getAllSongsForHome, } from '../lib/api'
+import { Text} from '@chakra-ui/react'
 
 export default function Index({songs}) {
-  return (
-    <Container>
-      <Header />
-      <SongBox songs={songs}/>
-    </Container>
-  )
+  if (!songs) {
+    return (
+      <Container>
+        <Text pt="12" pb="6" fontSize="5xl" color="red.500">Erreur !</Text>
+        <Text>Verifie que tu as bien lancé captainify-strapi !</Text>
+      </Container>
+    ) 
+  } else {
+      return (
+        <Container>
+          <Header />
+          <SongBox songs={songs}/>
+        </Container>
+      )
+  }
 }
 
 export async function getStaticProps() {
-  const songs = (await getAllSongsForHome())
-
-  return {
-    props: { songs },
+  const error_value = null
+  try {
+    const songs = await getAllSongsForHome()
+    return {
+      props: { songs },
+    }
+  } catch (err) {
+    console.log(err)
+    return {
+      props: { error_value },
+    }
   }
 }
