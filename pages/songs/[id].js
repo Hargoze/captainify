@@ -26,9 +26,9 @@ const AudioControls = ({ isPlaying, onPlayPauseClick }) => (
 
 export default function Songs({song}) {
     console.log(song.link)
-    const [isPlaying, setIsPlaying] = useState(false);
+    const [isPlaying, setIsPlaying] = useState(true);
     const audioRef = useRef(new Audio(`${song.file.url.startsWith('/') ? process.env.NEXT_PUBLIC_STRAPI_API_URL : ''}${song.file.url}`));
-    const isReady = useRef(false);
+    const isReady = useRef(true);
     useEffect(() => {
         if (isPlaying) {
           audioRef.current.play();
