@@ -42,17 +42,13 @@ const AudioControls = ({ isPlaying, onPlayPauseClick, trackProgress, duration })
 
 export default function Songs({song}) {
     const [trackProgress, setTrackProgress] = useState(0);
-    const [isPlaying, setIsPlaying] = useState(true);
-    
+    const [isPlaying, setIsPlaying] = useState(true);    
     const audioRef = useRef(new Audio(`${song.file.url.startsWith('/') ? process.env.NEXT_PUBLIC_STRAPI_API_URL : ''}${song.file.url}`));
     const intervalRef = useRef();
     const isReady = useRef(true);
-
-
     const { duration } = audioRef.current;
-
-    const currentPercentage = duration ? `${(trackProgress / duration) * 100}%` : "0%";
-    const trackStyling = `-webkit-gradient(linear, 0% 0%, 100% 0%, color-stop(${currentPercentage}, #fff), color-stop(${currentPercentage}, #777))`;
+    //const currentPercentage = duration ? `${(trackProgress / duration) * 100}%` : "0%";
+    //const trackStyling = `-webkit-gradient(linear, 0% 0%, 100% 0%, color-stop(${currentPercentage}, #fff), color-stop(${currentPercentage}, #777))`;
     const startTimer = () => {
       // Clear any timers already running
       clearInterval(intervalRef.current);
@@ -121,6 +117,9 @@ export default function Songs({song}) {
               </SliderTrack>
               <SliderThumb />
             </Slider>
+            <Text>{Math.trunc(trackProgress / 60) + ':' + ((Math.trunc(trackProgress % 60) < 10) ? '0' + Math.trunc(trackProgress % 60) : Math.trunc(trackProgress % 60))}</Text>
+            <Text>{Math.trunc(duration / 60) + ':' + ((Math.trunc(duration % 60) < 10) ? '0' + Math.trunc(duration % 60) : Math.trunc(duration % 60))}</Text>
+
         </Container>
     )
 }
