@@ -5,22 +5,37 @@ import { Header } from '../../components/Header'
 import { Container } from '../../components/Container'
 import React, { useEffect, useState, useRef } from 'react';
 
-const AudioControls = ({ isPlaying, onPlayPauseClick }) => (
+const PlayPause = ({ isPlaying, onPlayPauseClick}) => (
+  <div className="PlayPause">
+    {isPlaying ? (
+      <Button
+        onClick={() => onPlayPauseClick(false)}
+        aria-label="Pause"
+      >
+        Pause
+      </Button>
+    ) : (
+      <Button
+        onClick={() => onPlayPauseClick(true)}
+        aria-label="Play"
+      >
+        Play
+      </Button>
+    )}
+  </div>
+);
+
+const AudioControls = ({ isPlaying, onPlayPauseClick, trackProgress, duration }) => (
     <div className="audio-controls">
-      {isPlaying ? (
+      {trackProgress == duration ? (
         <Button
-          onClick={() => onPlayPauseClick(false)}
-          aria-label="Pause"
+          onClick={() => trackProgress = 0}
+          aria-label="replay"
         >
-          Pause
+          replay
         </Button>
       ) : (
-        <Button
-          onClick={() => onPlayPauseClick(true)}
-          aria-label="Play"
-        >
-          Play
-        </Button>
+        <PlayPause isPlaying={isPlaying} onPlayPauseClick={onPlayPauseClick}/>
       )}
     </div>
 );
@@ -93,29 +108,14 @@ export default function Songs({song}) {
             <Header />
             <Image src={`${song.thumbnail.url.startsWith('/') ? process.env.NEXT_PUBLIC_STRAPI_API_URL : ''}${song.thumbnail.url}`}/>
             
-            <AudioControls isPlaying={isPlaying} onPlayPauseClick={setIsPlaying} />
-            <input
-              type="range"
-              value={trackProgress}
-              step="1"
-              min="0"
-              max={duration ? duration : `${duration}`}
-              className="progress"
-              onChange={(e) => onScrub(e.target.value)}
-              onMouseUp={onScrubEnd}
-              onKeyUp={onScrubEnd}
-              style={{ background: trackStyling }}
-          />
-            <Slider 
-              w="40%"
-              step={10}
-              value={currentPercentage}
-              min="0"
-              max="100"
-              display="none"
-              onChange={(val) => onScrub(val)}
-              onMouseUp={onScrubEnd}
-              onKeyUp={onScrubEnd}>
+            <AudioControls isPlaying={isPlaying} onPlayPauseClick={setIsPlaying} trackProgress={trackProgress} duration={duration}/>
+            
+            <Slider aria-label="slider-ex-1" value={trackProgress} w="40%"
+            max={duration ? duration : `${duration}`}
+            onChange={(e) => onScrub(e)}
+            onMouseUp={onScrubEnd}
+            onKeyUp={onScrubEnd}
+            >
               <SliderTrack>
                 <SliderFilledTrack />
               </SliderTrack>
@@ -142,3 +142,18 @@ export async function getStaticPaths() {
       fallback: true,
     }
 }
+
+/* 
+<input
+  type="range"
+  value={trackProgress}
+  step="1"
+  min="0"
+  max={duration ? duration : `${duration}`}
+  
+  onChange={(e) => onScrub(e.target.value)}
+  onMouseUp={onScrubEnd}
+  onKeyUp={onScrubEnd}
+  style={{ background: trackStyling, width:"75%"}}
+/>
+*/
