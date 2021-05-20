@@ -1,4 +1,4 @@
-import { Stack, Text, IconButton, Flex,useColorModeValue} from '@chakra-ui/react'
+import { Stack, Text, Flex,useColorModeValue, Button} from '@chakra-ui/react'
 import { Slider, SliderTrack, SliderFilledTrack, SliderThumb} from "@chakra-ui/react"
 import { getAllSongsId, getSongById } from '../../lib/api'
 import { Header } from '../../components/Header'
@@ -6,27 +6,14 @@ import { Avatar } from "../../components/Avatar"
 import { Container } from '../../components/Container'
 import { Thumbnail } from "../../components/Thumbnail"
 import React, { useEffect, useState, useRef } from 'react';
-import { MdPlayArrow, MdPause } from "react-icons/md";
-import { DownloadIcon } from '@chakra-ui/icons'
+
 
 const PlayPause = ({ isPlaying }) => (
   <div className="PlayPause">
     {isPlaying ? (
-      <IconButton
-        isRound
-        colorScheme="blue"
-        aria-label="Pause"
-        size="lg"
-        as={MdPlayArrow}
-      />
+      <Button>Pause</Button>
     ) : (
-      <IconButton
-        isRound
-        size="lg"
-        colorScheme="blue"
-        aria-label="Play"
-        as={MdPause}
-      />
+      <Button>Play</Button>
     )}
   </div>
 );
@@ -70,12 +57,12 @@ export default function Songs({song}) {
     return (
         <Container>
             <Header />
-            <Stack alignItems="center" justifyContent="flex-start" mt="4" pb="2"  bg={boxcolor}>
-              <Thumbnail url={song.thumbnail.url} width="630px" height="auto"/>            
+            <Stack alignItems="center">
+              <Thumbnail url={song.thumbnail.url}/>            
               <PlayPause isPlaying={isPlaying} onPlayPauseClick={setIsPlaying}/>
-              <Flex w="70%" justify="space-around">
-                <Text color={textColor}>0:00</Text>
-                <Slider aria-label="music pourcentage"  w="75%"
+              <Flex w="70%">
+                <Text>0:00</Text>
+                <Slider aria-label="music pourcentage"
                 max={duration ? duration : `${duration}`}
                 >
                   <SliderTrack>
@@ -83,15 +70,14 @@ export default function Songs({song}) {
                   </SliderTrack>
                   <SliderThumb />
                 </Slider>
-                <Text color={textColor}>3:00</Text>
+                <Text>3:00</Text>
               </Flex>
 
-              <Flex justify="space-between" w="90%" align="center" p="4" bg="gray.100" rounded="lg">
-                <Flex align="center">
+              <Flex>
+                <Flex>
                   <Avatar url={song.author.picture.url}/>
-                  <Text fontSize="18px" pl="4">{song.author.name}</Text>
+                  <Text>{song.author.name}</Text>
                 </Flex>
-                <IconButton icon={<DownloadIcon/>} colorScheme="blue"/>
               </Flex>
             </Stack>
 
