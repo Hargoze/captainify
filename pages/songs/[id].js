@@ -64,58 +64,6 @@ export default function Songs({song}) {
     const boxcolor = useColorModeValue("gray.400", "gray.700")
     const textColor = useColorModeValue("black", "white")
 
-    //const currentPercentage = duration ? `${(trackProgress / duration) * 100}%` : "0%";
-    //const trackStyling = `-webkit-gradient(linear, 0% 0%, 100% 0%, color-stop(${currentPercentage}, #fff), color-stop(${currentPercentage}, #777))`;
-    const startTimer = () => {
-      // Clear any timers already running
-      clearInterval(intervalRef.current);
-
-      intervalRef.current = setInterval(() => {
-        if (audioRef.current.ended) {
-          console.log("ended")
-        } else {
-          setTrackProgress(audioRef.current.currentTime);
-        }
-      }, [1000]);
-    };
-
-    const onScrub = (value) => {
-      // Clear any timers already running
-      clearInterval(intervalRef.current);
-      audioRef.current.currentTime = value;
-      setTrackProgress(audioRef.current.currentTime);
-    };
-
-    const onScrubEnd = () => {
-      // If not already playing, start
-      if (!isPlaying) {
-        setIsPlaying(true);
-      }
-      startTimer();
-    };
-    useEffect(() => {
-        if (isPlaying) {
-          audioRef.current.play();
-          startTimer();
-        } else {
-          audioRef.current.pause();
-        }
-      }, [isPlaying]);
-    
-      // Handles cleanup and setup when changing tracks
-      useEffect(() => {
-        audioRef.current.pause();
-    
-        audioRef.current = new Audio(`${song.file.url.startsWith('/') ? process.env.NEXT_PUBLIC_STRAPI_API_URL : ''}${song.file.url}`);
-    
-        if (isReady.current) {
-          audioRef.current.play();
-          setIsPlaying(true);
-        } else {
-          // Set the isReady ref as true for the next pass
-          isReady.current = true;
-        }
-      }, []);
     return (
         <Container>
             <Header />
@@ -126,9 +74,7 @@ export default function Songs({song}) {
                 <Text color={textColor}>{Math.trunc(trackProgress / 60) + ':' + ((Math.trunc(trackProgress % 60) < 10) ? '0' + Math.trunc(trackProgress % 60) : Math.trunc(trackProgress % 60))}</Text>
                 <Slider aria-label="music pourcentage" value={trackProgress} w="75%"
                 max={duration ? duration : `${duration}`}
-                onChange={(e) => onScrub(e)}
-                onMouseUp={onScrubEnd}
-                onKeyUp={onScrubEnd}
+                
                 >
                   <SliderTrack>
                     <SliderFilledTrack />
@@ -168,20 +114,3 @@ export async function getStaticPaths() {
       fallback: true,
     }
 }
-
-/* 
-<input
-  type="range"
-  value={trackProgress}
-  step="1"
-  min="0"
-  max={duration ? duration : `${duration}`}
-  
-  onChange={(e) => onScrub(e.target.value)}
-  onMouseUp={onScrubEnd}
-  onKeyUp={onScrubEnd}
-  style={{ background: trackStyling, width:"75%"}}
-/>
-*/
-
-//<Image src={`${song.thumbnail.url.startsWith('/') ? process.env.NEXT_PUBLIC_STRAPI_API_URL : ''}${song.thumbnail.url}`}/>
