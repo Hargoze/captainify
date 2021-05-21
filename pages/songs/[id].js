@@ -18,7 +18,7 @@ const PlayPause = ({ isPlaying, onPlayPauseClick}) => (
         colorScheme="blue"
         aria-label="Pause"
         size="lg"
-        as={MdPlayArrow}
+        as={MdPause}
       />
     ) : (
       <IconButton
@@ -27,7 +27,7 @@ const PlayPause = ({ isPlaying, onPlayPauseClick}) => (
         onClick={() => onPlayPauseClick(true)}
         colorScheme="blue"
         aria-label="Play"
-        as={MdPause}
+        as={MdPlayArrow}
       />
     )}
   </div>
