@@ -1,8 +1,8 @@
 import ReactAudioPlayer from 'react-audio-player'
-import { Box, Stack, Flex, AspectRatio, Text, Image, Button, Checkbox} from '@chakra-ui/react'
+import { Box, Stack, Flex, AspectRatio, Text, Image, Button, Checkbox, Avatar} from '@chakra-ui/react'
 import { getAllSongsId, getAllSongsFromAuthor } from '../../lib/api'
 import { Header } from '../../components/Header'
-import { SongBox} from "../../components/SongBox"
+import { AuthorBox} from "../../components/AuthorBox"
 import { Container } from '../../components/Container'
 import React, { useEffect, useState } from 'react';
 import { Thumbnail } from "../../components/Thumbnail"
@@ -17,13 +17,9 @@ export default function Author ({author, songs}) {
         <Container>
             <Header />
             <Text fontSize={{ base: "100px", md: "60px", lg: "76px" }}>{author.name}</Text>
-            <Image width={{base:"50%", lg:"25%"}} borderRadius="full" alt="Bioutifoule Duck" boxSize={{base:"50%", lg:"25%"}} src={`${author.picture.url ? process.env.NEXT_PUBLIC_STRAPI_API_URL : ''}${author.picture.url}`}/>
-            {songs.map((current, i) => (
-                <Box key={i}>
-                    <Text >{current.title}</Text>
-                    <Thumbnail url={current.thumbnail.url} borderRadius="full"/>
-                </Box>
-            ))}
+
+                <Avatar size='2xl' src={`${author.picture.url ? process.env.NEXT_PUBLIC_STRAPI_API_URL : ''}${author.picture.url}`}/>
+            <AuthorBox songs={songs}/>
         </Container>
     )
 }

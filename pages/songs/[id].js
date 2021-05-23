@@ -1,4 +1,4 @@
-import { Stack, Text, IconButton, Flex,useColorModeValue} from '@chakra-ui/react'
+import { Stack, Text, IconButton, Flex,useColorModeValue, Link} from '@chakra-ui/react'
 import { Slider, SliderTrack, SliderFilledTrack, SliderThumb} from "@chakra-ui/react"
 import { getAllSongsId, getSongById } from '../../lib/api'
 import { Header } from '../../components/Header'
@@ -140,12 +140,15 @@ export default function Songs({song}) {
               </Flex>
 
               <Flex justify="space-between" w="90%" align="center" p="4" bg="gray.100" rounded="lg">
-                <Flex align="center">
-                  <Avatar url={song.author.picture.url}/>
-                  <Text fontSize="18px" pl="4">{song.author.name}</Text>
-                </Flex>
+                <Link _hover={{textDecoration:"none", bg:"gray.500"}} href={`/author/${song.author.id}`}>
+                  <Flex align="center">
+                    <Avatar url={song.author.picture.url}/>
+                    <Text fontSize="18px" pl="4">{song.author.name}</Text>
+                  </Flex>
+                </Link>
+
                 <IconButton icon={<DownloadIcon/>} colorScheme="blue"/>
-              </Flex>
+                </Flex>
             </Stack>
 
         </Container>
