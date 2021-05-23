@@ -52,6 +52,7 @@ const AudioControls = ({ isPlaying, onPlayPauseClick, trackProgress, duration })
 );
 
 export default function Songs({song}) {
+    console.log(song.author.id)
     const [trackProgress, setTrackProgress] = useState(0);
     const [isPlaying, setIsPlaying] = useState(true);
 
