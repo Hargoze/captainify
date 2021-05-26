@@ -9,7 +9,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { MdPlayArrow, MdPause } from "react-icons/md";
 import { DownloadIcon } from '@chakra-ui/icons'
 
-const PlayPause = ({ isPlaying }) => (
+const PlayPause = ({ isPlaying, onPlayPauseClick }) => (
   <div className="PlayPause">
     {isPlaying ? (
       <IconButton
@@ -17,7 +17,8 @@ const PlayPause = ({ isPlaying }) => (
         colorScheme="blue"
         aria-label="Pause"
         size="lg"
-        as={MdPlayArrow}
+        onClick={() => onPlayPauseClick(false)}
+        as={MdPause}
       />
     ) : (
       <IconButton
@@ -25,7 +26,8 @@ const PlayPause = ({ isPlaying }) => (
         size="lg"
         colorScheme="blue"
         aria-label="Play"
-        as={MdPause}
+        onClick={() => onPlayPauseClick(true)}
+        as={MdPlayArrow}
       />
     )}
   </div>
