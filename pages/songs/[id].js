@@ -8,12 +8,12 @@ import { Thumbnail } from "../../components/Thumbnail"
 import React, { useEffect, useState, useRef } from 'react';
 
 
-const PlayPause = ({ isPlaying }) => (
+const PlayPause = ({ isPlaying, onPlayPauseClick }) => (
   <div className="PlayPause">
     {isPlaying ? (
-      <Button>Pause</Button>
+      <Button onClick={() => onPlayPauseClick(false)}>Pause</Button>
     ) : (
-      <Button>Play</Button>
+      <Button onClick={() => onPlayPauseClick(true)}>Play</Button>
     )}
   </div>
 );
