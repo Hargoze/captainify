@@ -1,4 +1,4 @@
-import { Stack, Text, IconButton, Flex,useColorModeValue, Link} from '@chakra-ui/react'
+import { Stack, Text, IconButton, Flex,useColorModeValue, Link, Spinner} from '@chakra-ui/react'
 import { Slider, SliderTrack, SliderFilledTrack, SliderThumb} from "@chakra-ui/react"
 import { getAllSongsId, getSongById } from '../../lib/api'
 import { Header } from '../../components/Header'
@@ -52,7 +52,6 @@ const AudioControls = ({ isPlaying, onPlayPauseClick, trackProgress, duration })
 );
 
 export default function Songs({song}) {
-    console.log(song.author.id)
     const [trackProgress, setTrackProgress] = useState(0);
     const [isPlaying, setIsPlaying] = useState(true);
 
@@ -61,6 +60,7 @@ export default function Songs({song}) {
     const isReady = useRef(true);
 
     const { duration } = audioRef.current;
+    console.log(duration)
 
     const boxcolor = useColorModeValue("gray.400", "gray.700")
     const textColor = useColorModeValue("black", "white")
@@ -123,6 +123,7 @@ export default function Songs({song}) {
             <Stack alignItems="center" justifyContent="flex-start" mt="4" pb="2"  bg={boxcolor}>
               <Thumbnail url={song.thumbnail.url} width="630px" height="auto"/>            
               <AudioControls isPlaying={isPlaying} onPlayPauseClick={setIsPlaying} trackProgress={trackProgress} duration={duration}/>
+              {isNaN(duration) ? <Spinner /> :
               <Flex w="70%" justify="space-around">
                 <Text color={textColor}>{Math.trunc(trackProgress / 60) + ':' + ((Math.trunc(trackProgress % 60) < 10) ? '0' + Math.trunc(trackProgress % 60) : Math.trunc(trackProgress % 60))}</Text>
                 <Slider aria-label="music pourcentage" value={trackProgress} w="75%"
@@ -138,6 +139,7 @@ export default function Songs({song}) {
                 </Slider>
                 <Text color={textColor}>{Math.trunc(duration / 60) + ':' + ((Math.trunc(duration % 60) < 10) ? '0' + Math.trunc(duration % 60) : Math.trunc(duration % 60))}</Text>
               </Flex>
+              }
 
               <Flex justify="space-between" w="90%" align="center" p="4" bg="gray.100" rounded="lg">
                 <Link _hover={{textDecoration:"none", bg:"gray.500"}} href={`/author/${song.author.id}`}>

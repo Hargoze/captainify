@@ -16,7 +16,7 @@ export default function Author ({author, songs}) {
     return (
         <Container>
             <Header />
-            <Text fontSize={{ base: "100px", md: "60px", lg: "76px" }}>{author.name}</Text>
+            <Text fontSize={{base: "45px", lg: "76px" }} textOverflow="ellipsis" noOfLines={1}>{author.name}</Text>
 
                 <Avatar size='2xl' src={`${author.picture.url ? process.env.NEXT_PUBLIC_STRAPI_API_URL : ''}${author.picture.url}`}/>
             <AuthorBox songs={songs}/>
