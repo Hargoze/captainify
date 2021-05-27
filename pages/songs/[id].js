@@ -3,6 +3,7 @@ import { Slider, SliderTrack, SliderFilledTrack, SliderThumb} from "@chakra-ui/r
 import { getAllSongsId, getSongById } from '../../lib/api'
 import { Header } from '../../components/Header'
 import { Avatar } from "../../components/Avatar"
+import { PageInfo } from '../../components/Head'
 import { Container } from '../../components/Container'
 import { Thumbnail } from "../../components/Thumbnail"
 import React, { useEffect, useState, useRef } from 'react';
@@ -119,6 +120,7 @@ export default function Songs({song}) {
       }, []);
     return (
         <Container>
+            <PageInfo title={song.title + " - capitainify"}/>
             <Header />
             <Stack alignItems="center" justifyContent="flex-start" mt="4" pb="2"  bg={boxcolor}>
               <Thumbnail url={song.thumbnail.url} width="630px" height="auto"/>            
@@ -174,20 +176,3 @@ export async function getStaticPaths() {
       fallback: true,
     }
 }
-
-/* 
-<input
-  type="range"
-  value={trackProgress}
-  step="1"
-  min="0"
-  max={duration ? duration : `${duration}`}
-  
-  onChange={(e) => onScrub(e.target.value)}
-  onMouseUp={onScrubEnd}
-  onKeyUp={onScrubEnd}
-  style={{ background: trackStyling, width:"75%"}}
-/>
-*/
-
-//<Image src={`${song.thumbnail.url.startsWith('/') ? process.env.NEXT_PUBLIC_STRAPI_API_URL : ''}${song.thumbnail.url}`}/>

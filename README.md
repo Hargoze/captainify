@@ -12,6 +12,7 @@ and add your own element to the db
 Open a terminal on the captainify-strapi repo you just cloned. then launch it with:
 
 ```bash
+npm install # or: yarn
 npm run develop # or: yarn develop
 ```
 
@@ -81,7 +82,7 @@ Next, select **Songs** and click **Add New Song**.
 While the Strapi server is running, open a new terminal and `cd` into the Next.js app directory you created earlier.
 
 ```
-cd cms-strapi-app
+cd captainify
 ```
 
 Copy the `.env.local.example` file in this directory to `.env.local` (which will be ignored by Git):

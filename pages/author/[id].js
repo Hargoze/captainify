@@ -1,22 +1,23 @@
-import ReactAudioPlayer from 'react-audio-player'
-import { Box, Stack, Flex, AspectRatio, Text, Image, Button, Checkbox, Avatar} from '@chakra-ui/react'
+import { useColorModeValue, Text, Avatar} from '@chakra-ui/react'
 import { getAllSongsId, getAllSongsFromAuthor } from '../../lib/api'
 import { Header } from '../../components/Header'
+import { PageInfo } from '../../components/Head'
 import { AuthorBox} from "../../components/AuthorBox"
 import { Container } from '../../components/Container'
-import React, { useEffect, useState } from 'react';
-import { Thumbnail } from "../../components/Thumbnail"
+import React from 'react';
 
 export default function Author ({author, songs}) {
+    const textColor = useColorModeValue("black", "white")
     if (!author) {
         return (
-            <Text>Loading</Text>
+            <Text color={textColor}>Loading</Text>
         )
     }
     return (
         <Container>
+            <PageInfo title={author.name + " - capitainify"}/>
             <Header />
-            <Text fontSize={{base: "45px", lg: "76px" }} textOverflow="ellipsis" noOfLines={1}>{author.name}</Text>
+            <Text fontSize={{base: "45px", lg: "76px" }} color={textColor} textOverflow="ellipsis" noOfLines={1}>{author.name}</Text>
 
                 <Avatar size='2xl' src={`${author.picture.url ? process.env.NEXT_PUBLIC_STRAPI_API_URL : ''}${author.picture.url}`}/>
             <AuthorBox songs={songs}/>
