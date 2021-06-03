@@ -37,8 +37,8 @@ export async function getStaticProps({ params}) {
 export async function getStaticPaths() {
     const allSongs = await getAllSongsId()
     return {
-      paths: allSongs.songs.map((post) => ({
-        params: { id: post.id },
+      paths: allSongs.songs.map((author) => ({
+        params: { id: author.id },
       })),
       fallback: true,
     }
