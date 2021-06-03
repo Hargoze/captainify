@@ -6,7 +6,7 @@ export const AuthorBox = ({songs}) => {
     const textColor = useColorModeValue("black", "white")
 
     return (
-      <SimpleGrid columns={{base: 1, lg: 2}} spacing={10} mt="8" bg="pink.300">
+      <SimpleGrid columns={{base: 1, lg: 2}} spacing={10} mt="8" >
         {songs.map((current, i) => (
           <Link _hover={{textDecoration:"none"}} key={i} href={`/songs/${current.id}`} my="4" >
             <Flex direction={{base: "column", md:"row"}} shadow="0 7px 29px -12px rgba(0,0,0,34)" bg={bg}

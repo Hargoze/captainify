@@ -1,5 +1,5 @@
 import { useColorModeValue, Text, Avatar} from '@chakra-ui/react'
-import { getAllSongsId, getAllSongsFromAuthor } from '../../lib/api'
+import { getAllSongsId, getAllAuthorsId, getAllSongsFromAuthor } from '../../lib/api'
 import { Header } from '../../components/Header'
 import { PageInfo } from '../../components/Head'
 import { AuthorBox} from "../../components/AuthorBox"
@@ -35,9 +35,9 @@ export async function getStaticProps({ params}) {
 }
 
 export async function getStaticPaths() {
-    const allSongs = await getAllSongsId()
+    const allSongs = await getAllAuthorsId()
     return {
-      paths: allSongs.songs.map((author) => ({
+      paths: allSongs.authors.map((author) => ({
         params: { id: author.id },
       })),
       fallback: true,
