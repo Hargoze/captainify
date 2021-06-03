@@ -21,7 +21,7 @@ export const AuthorBox = ({songs}) => {
         ))}
       </SimpleGrid>
     )
-    }
+    } 
     else {
       return (
         <SimpleGrid columns={{base: 1, lg: 2}} spacing={10} mt="8">
