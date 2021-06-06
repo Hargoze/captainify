@@ -1,6 +1,7 @@
 import { Header } from '../components/Header'
 import { Container } from '../components/Container'
 import { SongBox} from "../components/SongBox"
+import { SearchBar} from "../components/SearchBar"
 import { PageInfo } from "../components/Head"
 import { getAllSongsForHome, } from '../lib/api'
 import { Text} from '@chakra-ui/react'
@@ -19,6 +20,7 @@ export default function Index({songs}) {
         <Container>
           <PageInfo title={"capitainify"}/>
           <Header />
+          <SearchBar />
           <SongBox songs={songs}/>
         </Container>
       )
