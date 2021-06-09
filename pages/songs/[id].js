@@ -61,13 +61,10 @@ export default function Songs({song}) {
     const isReady = useRef(true);
 
     const { duration } = audioRef.current;
-    console.log(duration)
 
     const boxcolor = useColorModeValue("gray.400", "gray.700")
     const textColor = useColorModeValue("black", "white")
 
-    //const currentPercentage = duration ? `${(trackProgress / duration) * 100}%` : "0%";
-    //const trackStyling = `-webkit-gradient(linear, 0% 0%, 100% 0%, color-stop(${currentPercentage}, #fff), color-stop(${currentPercentage}, #777))`;
     const startTimer = () => {
       // Clear any timers already running
       clearInterval(intervalRef.current);
@@ -86,6 +83,7 @@ export default function Songs({song}) {
       clearInterval(intervalRef.current);
       audioRef.current.currentTime = value;
       setTrackProgress(audioRef.current.currentTime);
+      startTimer();
     };
 
     const onScrubEnd = () => {
