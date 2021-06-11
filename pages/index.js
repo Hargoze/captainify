@@ -13,7 +13,7 @@ export default function Index({songs}) {
         <PageInfo title={"capitainify"}/>
         <Text pt="12" pb="6" fontSize="5xl" color="red.500">Erreur !</Text>
         <Text>Verifie que tu as bien lancé captainify-strapi !</Text>
-      </Container>
+      </Container> 
     ) 
   } else {
       return (
