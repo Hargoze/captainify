@@ -58,7 +58,6 @@ export default function Songs({song}) {
 
     const audioRef = useRef(new Audio(`${song.file.url.startsWith('/') ? process.env.NEXT_PUBLIC_STRAPI_API_URL : ''}${song.file.url}`));
     const intervalRef = useRef();
-    const isReady = useRef(true);
 
     const { duration } = audioRef.current;
 
@@ -101,21 +100,7 @@ export default function Songs({song}) {
           audioRef.current.pause();
         }
       }, [isPlaying]);
-    
-      // Handles cleanup and setup when changing tracks
-      useEffect(() => {
-        audioRef.current.pause();
-    
-        audioRef.current = new Audio(`${song.file.url.startsWith('/') ? process.env.NEXT_PUBLIC_STRAPI_API_URL : ''}${song.file.url}`);
-    
-        if (isReady.current) {
-          audioRef.current.play();
-          setIsPlaying(true);
-        } else {
-          // Set the isReady ref as true for the next pass
-          isReady.current = true;
-        }
-      }, []);
+      
     return (
         <Container>
             <PageInfo title={song.title + " - capitainify"}/>

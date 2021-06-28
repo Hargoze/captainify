@@ -6,6 +6,18 @@ export const SongBox = ({songs}) => {
     const bg = useColorModeValue("gray.100", "gray.700")
     const textColor = useColorModeValue("black", "white")
 
+    if (!songs) {
+      return (
+      <Stack >
+        <Text>something went wrong, sorry bout that</Text>
+      </Stack>
+    )}
+    if (songs.length === 0) {
+      return (
+      <Stack my="24" align="center" color="red.500">
+        <Text fontSize="28px" fontWeight="bold">sorry, no match found ;(</Text>
+      </Stack>
+    )}
     return (
       <Stack my="24" width={{base:"80%", md:"60%", lg:"40%"}} color={textColor} align="center" >
         {songs.map((current, i) => (

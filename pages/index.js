@@ -2,11 +2,13 @@ import { Header } from '../components/Header'
 import { Container } from '../components/Container'
 import { SongBox} from "../components/SongBox"
 import { PageInfo } from "../components/Head"
-import {SearchBar} from "../components/SearchBar"
+import { SearchBar } from "../components/SearchBar"
 import { getAllSongsForHome, } from '../lib/api'
-import { Text} from '@chakra-ui/react'
+import { Text } from '@chakra-ui/react'
+import { useState } from 'react'
 
 export default function Index({songs}) {
+  const [result, setResult] = useState()
   if (!songs) {
     return (
       <Container>
@@ -20,8 +22,8 @@ export default function Index({songs}) {
         <Container>
           <PageInfo title={"capitainify"}/>
           <Header />
-          <SearchBar/>
-          <SongBox songs={songs}/>
+          <SearchBar setResult={setResult}/>
+          {result ? <SongBox songs={result}/> : <SongBox songs={songs}/>}
         </Container>
       )
   }
