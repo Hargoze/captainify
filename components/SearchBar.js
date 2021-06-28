@@ -1,6 +1,7 @@
 import { Flex, Box, Input, IconButton} from "@chakra-ui/react";
-import { useState } from 'react'
 import {SearchIcon} from '@chakra-ui/icons'
+import { search, } from '../lib/api'
+
 const MeiliSearch = require("meilisearch");
 
 const config = {
@@ -10,16 +11,7 @@ const config = {
 
 const client = new MeiliSearch(config)
 
-export const SearchBar = ({setResult}) => {
-    const [input, setInput] = useState('')
-
-    async function search(SearchInput) {
-        const index = await client.getIndex('captainify')
-        const resp = await index.search(SearchInput, {
-        attributesToHighlight: ['title'],
-        }, 'GET')
-        setResult(resp.hits)
-    }
+export const SearchBar = ({setResult, input, setInput, offset}) => {
 
     return (
         <Flex mt={{base:"40", sm:"24"}} w="100%" align="center" justify="center">
@@ -42,12 +34,12 @@ export const SearchBar = ({setResult}) => {
                 }}
                 type='text'
                 value={input} onChange={e => setInput(e.target.value)}
-                onKeyDown={() => search(input)}
+                onKeyDown={() => search(setResult, input, offset)}
                 >
             </Box>
             
             <IconButton bg="gray.400" _hover={{ bg:"gray.600" }}color="white" aria-label="Search post" icon={<SearchIcon />} 
-            onClick={() => search(input)} ml="2"/>
+            onClick={() => search(setResult, input, offset)} ml="2"/>
             
         </Flex>
   )

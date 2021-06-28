@@ -6,6 +6,8 @@ export const SongBox = ({songs}) => {
     const bg = useColorModeValue("gray.100", "gray.700")
     const textColor = useColorModeValue("black", "white")
 
+    console.log(songs)
+
     if (!songs) {
       return (
       <Stack >
@@ -19,9 +21,9 @@ export const SongBox = ({songs}) => {
       </Stack>
     )}
     return (
-      <Stack my="24" width={{base:"80%", md:"60%", lg:"40%"}} color={textColor} align="center" >
+      <Stack my="24" width={{base:"80%", md:"60%", lg:"40%"}} color={textColor} align="center">
         {songs.map((current, i) => (
-          <Link _hover={{textDecoration:"none"}} key={i} href={`/songs/${current.id}`} my="4" >
+          <Link _hover={{textDecoration:"none"}} key={i} href={`/songs/${current.id}`} pt="4">
             <Flex direction={{base: "column", md:"row"}} shadow="0 7px 29px -12px rgba(0,0,0,34)" bg={bg}
             _hover={{textDecoration:"none", transform: "scale(1.02)"}} w={{base:"315px", md:"630px"}}>
                 <Thumbnail url={current.thumbnail.url} borderRadius="full"/>
