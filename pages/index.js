@@ -8,19 +8,26 @@ import { Text, Button } from '@chakra-ui/react'
 import React, { useState } from 'react'
 
 export default function Index({songs}) {
-  var [result, setResult] = useState()
-  const [offset, setOffset] = useState(1);
+  const [result, setResult] = useState()
+  //const [offset, setOffset] = useState(0);
+  var offset = 0
   const [input, setInput] = useState('')
 
   function PreviousPage(setResult, input, offset, setOffset) {
-    if (offset > 1) {
-      setOffset(offset - 1)
-      search(setResult, input, offset)
+    if (offset > 0) {
+      console.log("before" + offset)
+      //setOffset(offset - 1)
+      offset = offset - 1
+      console.log("after" + offset)
     }
+    search(setResult, input, offset)
   }
 
   function NextPage(setResult, input, offset, setOffset) {
-    setOffset(offset + 1)
+    console.log("before" + offset)
+    //setOffset(offset + 1)
+    offset = offset + 1
+    console.log("after" + offset)
     search(setResult, input, offset)
   }
   if (!songs) {
@@ -38,9 +45,9 @@ export default function Index({songs}) {
           <Header />
           <SearchBar setResult={setResult} input={input} setInput={setInput} offset={offset}/>
           {result ? <SongBox songs={result}/> : <SongBox songs={songs}/>}
-          <Button onClick={() =>  PreviousPage(setResult, input, offset, setOffset)}>prev page</Button>
-          <Text>Page n°{offset}</Text>
-          <Button onClick={() => NextPage(setResult, input, offset, setOffset)}>Next Page</Button>
+          <Button onClick={() =>  PreviousPage(setResult, input, offset)}>prev page</Button>
+          <Text>Page n°{offset + 1}</Text>
+          <Button onClick={() => NextPage(setResult, input, offset)}>Next Page</Button>
         </Container>
       )
   }

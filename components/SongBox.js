@@ -6,8 +6,6 @@ export const SongBox = ({songs}) => {
     const bg = useColorModeValue("gray.100", "gray.700")
     const textColor = useColorModeValue("black", "white")
 
-    console.log(songs)
-
     if (!songs) {
       return (
       <Stack >

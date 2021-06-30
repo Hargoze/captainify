@@ -2,15 +2,6 @@ import { Flex, Box, Input, IconButton} from "@chakra-ui/react";
 import {SearchIcon} from '@chakra-ui/icons'
 import { search, } from '../lib/api'
 
-const MeiliSearch = require("meilisearch");
-
-const config = {
-  host: 'http://127.0.0.1:7700',
-  apiKey: 'masterKey',
-}
-
-const client = new MeiliSearch(config)
-
 export const SearchBar = ({setResult, input, setInput, offset}) => {
 
     return (
