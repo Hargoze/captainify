@@ -3,13 +3,13 @@ import { Container } from '../components/Container'
 import { SongBox} from "../components/SongBox"
 import { PageInfo } from "../components/Head"
 import { SearchBar } from "../components/SearchBar"
-import { getAllSongsForHome, search} from '../lib/api'
+import { getAllSongsForHome, getAllSongs, search} from '../lib/api'
 import { Text, Button } from '@chakra-ui/react'
 import React, { useState } from 'react'
 
 var offset = 0
 
-export default function Index({songs}) {
+export default function Index({songs, nb_pages }) {
   const [result, setResult] = useState()
   //const [offset, setOffset] = useState(0);
   const [input, setInput] = useState('')
@@ -26,10 +26,15 @@ export default function Index({songs}) {
   }
 
   function NextPage(setResult, input) {
-    console.log("before" + offset)
-    //setOffset(offset + 1)
-    offset = offset + 1
-    console.log("after" + offset)
+    console.log(songs.length)
+    console.log(offset)
+    console.log(nb_pages.length / 2)
+    if (offset + 1 < nb_pages.length / 2) {
+      console.log("before" + offset)
+      //setOffset(offset + 1)
+      offset = offset + 1
+      console.log("after" + offset)
+    }
     search(setResult, input, offset)
     return offset
   }
@@ -60,8 +65,9 @@ export async function getStaticProps() {
   const error_value = null
   try {
     const songs = await getAllSongsForHome()
+    const nb_pages = await getAllSongs()
     return {
-      props: { songs },
+      props: { songs, nb_pages },
     }
   } catch (err) {
     console.log(err)
