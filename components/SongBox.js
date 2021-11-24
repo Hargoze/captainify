@@ -1,4 +1,4 @@
-import { Flex, Stack, Text, Link, useColorModeValue} from '@chakra-ui/react'
+import { Flex, Stack, Text, Link, useColorModeValue, Box} from '@chakra-ui/react'
 import { Thumbnail } from "./Thumbnail"
 import { Avatar } from "./Avatar"
 
@@ -26,10 +26,10 @@ export const SongBox = ({songs}) => {
             _hover={{textDecoration:"none", transform: "scale(1.02)"}} w={{base:"315px", md:"630px"}}>
                 <Thumbnail url={current.thumbnail.url} borderRadius="full"/>
                 <Stack w="100%" alignItems="start" px="6" justify="space-around" py={{base:"6",lg:"0"}}>
-                   <Text fontSize="24px" textOverflow="ellipsis" noOfLines={{base:1, md:2}}>{current.title}</Text>
-                   <Flex justify="center" align="center">
-                     <Avatar url={current.author.picture.url}/>
-                     <Text fontSize="18px" pl="4">{current.author.name}</Text>
+                    <Text fontSize="24px" textOverflow="ellipsis" noOfLines={{base:1, md:2}}>{current.title}</Text>
+                    <Flex justify="center" align="center">
+                      <Avatar url={current.author.picture.url}/>
+                      <Text fontSize="18px" pl="4">{current.author.name}</Text>
                     </Flex>
                 </Stack>
             </Flex>

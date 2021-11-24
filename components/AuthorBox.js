@@ -1,5 +1,4 @@
 import { Flex, Stack, Text, Link, useColorModeValue, SimpleGrid} from '@chakra-ui/react'
-import { getAllSongsId } from '../lib/api'
 import { Thumbnail } from "./Thumbnail"
 
 export const AuthorBox = ({songs}) => {
@@ -19,7 +18,7 @@ export const AuthorBox = ({songs}) => {
             </Flex>
           </Link>
         ))}
-      </SimpleGrid>
+      </SimpleGrid> 
     )
     }
     else {
