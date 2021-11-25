@@ -1,7 +1,6 @@
 import { Flex, Box, IconButton} from "@chakra-ui/react";
 import { useState } from 'react'
 import {SearchIcon} from '@chakra-ui/icons'
-import axios from "axios"
 
 export const SearchBar = () => {
     const [input, setInput] = useState('')
