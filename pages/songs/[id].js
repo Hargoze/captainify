@@ -56,7 +56,7 @@ export default function Songs({song}) {
     const [trackProgress, setTrackProgress] = useState(0);
     const [isPlaying, setIsPlaying] = useState(true);
 
-    const audioRef = useRef(new Audio(`${song.file.url.startsWith('/') ? process.env.NEXT_PUBLIC_STRAPI_API_URL : ''}${song.file.url}`));
+    const audioRef = useRef(new Audio(`${song.file.url.startsWith('/') ? process.env.NEXT_PUBLIC_STRAPI_API_URL : ''}${song.file.url}`)); //une sorte de pointeur 
     const intervalRef = useRef();
 
     const { duration } = audioRef.current;
@@ -66,7 +66,7 @@ export default function Songs({song}) {
 
     const startTimer = () => {
       // Clear any timers already running
-      clearInterval(intervalRef.current);
+      //clearInterval(intervalRef.current);
 
       intervalRef.current = setInterval(() => {
         if (audioRef.current.ended) {
@@ -92,7 +92,7 @@ export default function Songs({song}) {
       }
       startTimer();
     };
-    useEffect(() => {
+    useEffect(() => { //créer du dynamisme : https://dmitripavlutin.com/react-useeffect-explanation/
         if (isPlaying) {
           audioRef.current.play();
           startTimer();
